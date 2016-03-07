@@ -5,6 +5,9 @@
  */
 package crossyroad;
 
+import java.awt.Dimension;
+import environment.ApplicationStarter;
+
 /**
  *
  * @author aidanmartin
@@ -15,7 +18,8 @@ public class CrossyRoad {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        // TODO code application logic here
+    ApplicationStarter.run(new String[0], "Crossy Roads", new Dimension(1000,1000), new GameSurface());
+    
     }
     
 }
