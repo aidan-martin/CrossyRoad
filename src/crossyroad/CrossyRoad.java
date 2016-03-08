@@ -18,7 +18,7 @@ public class CrossyRoad {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-    ApplicationStarter.run(new String[0], "Crossy Roads", new Dimension(1000,1000), new GameSurface());
+    ApplicationStarter.run(new String[0], "Crossy Road", new Dimension(1000,1000), new GameSurface());
     
     }
     
