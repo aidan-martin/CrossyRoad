@@ -6,7 +6,10 @@
 package crossyroad;
 
 import environment.Environment;
+import grid.Grid;
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 
@@ -14,9 +17,14 @@ import java.awt.event.MouseEvent;
  *
  * @author aidanmartin
  */
-class GameSurface extends Environment{
+class GameSurface extends Environment {
+
+    Grid grid;
 
     public GameSurface() {
+
+        grid = new Grid(20, 10, 50, 50, new Point(0, 0), Color.DARK_GRAY);
+
     }
 
     @Override
@@ -41,8 +49,9 @@ class GameSurface extends Environment{
 
     @Override
     public void paintEnvironment(Graphics graphics) {
-    }
+        if (grid != null) {
+            grid.paintComponent(graphics);
+        }
 
-    
-    
+    }
 }
