@@ -23,7 +23,7 @@ class GameSurface extends Environment {
 
     public GameSurface() {
 
-        grid = new Grid(20, 10, 50, 50, new Point(0, 0), Color.DARK_GRAY);
+        grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
 
     }
 
