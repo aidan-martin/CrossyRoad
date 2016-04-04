@@ -13,24 +13,11 @@ import java.awt.Image;
  */
 public class MainCharacter {
 
-    //speed, direction, location, image, size
-    private int speed;
+       
+    
+    //<editor-fold defaultstate="collapsed" desc="Properties">
     private Direction direction;
     private Image image;
-
-    /**
-     * @return the speed
-     */
-    public int getSpeed() {
-        return speed;
-    }
-
-    /**
-     * @param speed the speed to set
-     */
-    public void setSpeed(int speed) {
-        this.speed = speed;
-    }
 
     /**
      * @return the direction
@@ -59,5 +46,6 @@ public class MainCharacter {
     public void setImage(Image image) {
         this.image = image;
     }
-    
+//</editor-fold>
+
 }

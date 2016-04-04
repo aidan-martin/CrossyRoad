@@ -12,11 +12,16 @@ import java.awt.Image;
  * @author aidanmartin
  */
 public class LaneObject {
-    
+
     //rafts, trains, cars
     //barriers -- trees, rocks, benches
     //coins
     
+    
+    public void barriers() {
+        
+    }
+
     
 //<editor-fold defaultstate="collapsed" desc="Properties">
     //properties
@@ -29,56 +34,56 @@ public class LaneObject {
     private Direction direction;
     private Image image;
     private boolean standable;
-    
+
     /**
      * @return the speed
      */
     public int getSpeed() {
         return speed;
     }
-    
+
     /**
      * @param speed the speed to set
      */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
+
     /**
      * @return the direction
      */
     public Direction getDirection() {
         return direction;
     }
-    
+
     /**
      * @param direction the direction to set
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
-    
+
     /**
      * @return the image
      */
     public Image getImage() {
         return image;
     }
-    
+
     /**
      * @param image the image to set
      */
     public void setImage(Image image) {
         this.image = image;
     }
-    
+
     /**
      * @return the standable
      */
     public boolean isStandable() {
         return standable;
     }
-    
+
     /**
      * @param standable the standable to set
      */
@@ -86,6 +91,5 @@ public class LaneObject {
         this.standable = standable;
     }
 //</editor-fold>
-    
-    
+
 }
