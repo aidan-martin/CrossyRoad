@@ -37,7 +37,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
        lanes.add(new Lane(3, LaneType.WATER, this));
 
        laneBaseHeight = 400;
-       laneHeight = 50;
+       laneHeight = 70;
        
     }
 
@@ -64,9 +64,9 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 
     @Override
     public void paintEnvironment(Graphics graphics) {
-        if (grid != null) {
-            grid.paintComponent(graphics);
-        }
+//        if (grid != null) {
+//            grid.paintComponent(graphics);
+//        }
         
         if (lanes != null) {
             for (Lane lane: lanes){
