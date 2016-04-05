@@ -39,7 +39,7 @@ public class Lane {
     private Color getColor() {
         switch (type) {
             case WATER:
-                return Color.BLUE;
+                return (new Color(135, 206, 250));
 
             case ROAD:
                 return Color.DARK_GRAY;
@@ -48,7 +48,7 @@ public class Lane {
                 return Color.GRAY;
 
             case FIELD:
-                return Color.GREEN;
+                return (new Color(34, 139, 34));
             
             default :
                 return Color.WHITE;
