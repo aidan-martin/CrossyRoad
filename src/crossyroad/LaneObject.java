@@ -18,6 +18,8 @@ public class LaneObject {
     //coins
     
     
+    
+    
     public void barriers() {
         
     }

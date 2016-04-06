@@ -35,6 +35,8 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
        lanes.add(new Lane(1, LaneType.SIDEWALK, this));
        lanes.add(new Lane(2, LaneType.ROAD, this));
        lanes.add(new Lane(3, LaneType.WATER, this));
+       lanes.add(new Lane(4, LaneType.SIDEWALK, this));
+       lanes.add(new Lane(5, LaneType.SIDEWALK, this));
 
        laneBaseHeight = 300;
        laneHeight = 60;
