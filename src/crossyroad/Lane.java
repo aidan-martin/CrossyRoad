@@ -20,6 +20,7 @@ public class Lane {
     private LaneType type;
     private int laneNumber;
     private SizeLocationProviderIntf sizeLocationProvider;
+    
 
     public Lane(int laneNumber, LaneType type, SizeLocationProviderIntf sizeLocationProvider) {
         this.laneNumber = laneNumber;
