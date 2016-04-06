@@ -5,6 +5,8 @@
  */
 package crossyroad;
 
+import images.ResourceTools;
+import java.awt.Graphics;
 import java.awt.Image;
 
 /**
@@ -13,12 +15,40 @@ import java.awt.Image;
  */
 public class LaneObject {
 
+private ObjectType type;
+Image Long_Log;
+Image Medium_Log;
+Image Short_Log;
+Image Tree;
+Image Car;
+
+
+public LaneObject(ObjectType type){
+    this.type = type;
+    
+}
+
+public void Draw(Graphics graphics){
+//    graphics.drawImage(getImage, x, y, null)
+Long_Log = ResourceTools.loadImageFromResource("crossyroad/Long_Log.png");
+Medium_Log = ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png");
+Short_Log = ResourceTools.loadImageFromResource("crossyroad/Short_Log.png");
+Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
+
+}
+
+
+
     //rafts, trains, cars
     //barriers -- trees, rocks, benches
     //coins
     
+    // put pictures in!!
+   
+    
     
     public void barriers() {
+        
         
     }
 

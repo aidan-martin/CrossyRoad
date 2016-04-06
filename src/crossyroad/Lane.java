@@ -5,8 +5,10 @@
  */
 package crossyroad;
 
+import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,17 +16,15 @@ import java.awt.Graphics;
  */
 public class Lane {
 
-    //x and y
-    // height, width
-    //private lane type
     private LaneType type;
     private int laneNumber;
     private SizeLocationProviderIntf sizeLocationProvider;
-
     public Lane(int laneNumber, LaneType type, SizeLocationProviderIntf sizeLocationProvider) {
         this.laneNumber = laneNumber;
         this.type = type;
         this.sizeLocationProvider = sizeLocationProvider;
+
+        //make array list for lane objects in lane class **************
     }
 
     public void draw(Graphics graphics) {
@@ -33,9 +33,9 @@ public class Lane {
                 sizeLocationProvider.getTopLeftY(laneNumber), 
                 sizeLocationProvider.getLaneWidth(laneNumber), 
                 sizeLocationProvider.getLaneHeight(laneNumber));
+        
     }
 
-//types: field, 
     private Color getColor() {
         switch (type) {
             case WATER:

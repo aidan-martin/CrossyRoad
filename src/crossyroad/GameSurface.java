@@ -22,6 +22,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 
     Grid grid;
     ArrayList<Lane> lanes;
+    ArrayList<Lane> laneObjects;
     private int laneBaseHeight;
     private int laneHeight;
     
@@ -36,8 +37,11 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
        lanes.add(new Lane(2, LaneType.ROAD, this));
        lanes.add(new Lane(3, LaneType.WATER, this));
 
-       laneBaseHeight = 400;
+       laneBaseHeight = 200;
        laneHeight = 70;
+       
+       laneObjects = new ArrayList<>();
+       
        
     }
 
