@@ -5,8 +5,10 @@
  */
 package crossyroad;
 
+import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.ArrayList;
 
 /**
  *
@@ -14,6 +16,7 @@ import java.awt.Graphics;
  */
 public class Lane {
 
+<<<<<<< HEAD
     //x and y
     // height, width
     //private lane type
@@ -23,20 +26,42 @@ public class Lane {
     
 
     public Lane(int laneNumber, LaneType type, SizeLocationProviderIntf sizeLocationProvider) {
+=======
+    
+    {
+        laneObjects = new ArrayList<>();
+    }
+    
+    public Lane(int laneNumber, LaneType type, SizeLocationProviderIntf sizeLocationProvider, 
+            ArrayList<LaneObject> laneObjects) {
+>>>>>>> master
         this.laneNumber = laneNumber;
         this.type = type;
         this.sizeLocationProvider = sizeLocationProvider;
+        
+        this.laneObjects = laneObjects;
+
+        //make array list for lane objects in lane class **************
     }
 
     public void draw(Graphics graphics) {
+        for (LaneObject laneObject : laneObjects) {
+            laneObject.setY(sizeLocationProvider.getTopLeftY(laneNumber));
+        }
+        
+        
         graphics.setColor(getColor());
         graphics.fillRect(sizeLocationProvider.getTopLeftX(laneNumber), 
                 sizeLocationProvider.getTopLeftY(laneNumber), 
                 sizeLocationProvider.getLaneWidth(laneNumber), 
                 sizeLocationProvider.getLaneHeight(laneNumber));
+        
+        for (LaneObject laneObject : laneObjects){
+            laneObject.draw(graphics);
+        }
+        
     }
 
-//types: field, 
     private Color getColor() {
         switch (type) {
             case WATER:
@@ -57,4 +82,30 @@ public class Lane {
         }
     }
 
+    private final LaneType type;
+    private final int laneNumber;
+    private SizeLocationProviderIntf sizeLocationProvider;
+    private int y;
+    
+    private ArrayList<LaneObject> laneObjects;
+
+    void update() {
+        for (LaneObject laneObject : laneObjects){
+            laneObject.move();
+        }
+    }
+
+    /**
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * @param y the y to set
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
 }

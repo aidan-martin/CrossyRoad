@@ -7,8 +7,10 @@ package crossyroad;
 
 import environment.Environment;
 import grid.Grid;
+import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -22,15 +24,18 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 
     Grid grid;
     ArrayList<Lane> lanes;
+    ArrayList<Lane> laneObjects;
     private int laneBaseHeight;
     private int laneHeight;
-    
+    private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
+    private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
 
     public GameSurface() {
 
         grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
         
        lanes = new ArrayList<>();
+<<<<<<< HEAD
        lanes.add(new Lane(0, LaneType.FIELD, this));
        lanes.add(new Lane(1, LaneType.SIDEWALK, this));
        lanes.add(new Lane(2, LaneType.ROAD, this));
@@ -40,6 +45,23 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 
        laneBaseHeight = 300;
        laneHeight = 60;
+=======
+       
+       ArrayList<LaneObject> lo = new ArrayList<>();
+       lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 0, Tree));
+       lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 150, 200, 4, RedCar));
+       
+       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+//       lanes.add(new Lane(1, LaneType.SIDEWALK, this));
+//       lanes.add(new Lane(2, LaneType.ROAD, this));
+//       lanes.add(new Lane(3, LaneType.WATER, this));
+
+       laneBaseHeight = 200;
+       laneHeight = 70;
+>>>>>>> master
+       
+       laneObjects = new ArrayList<>();
+       
        
     }
 
@@ -50,6 +72,10 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
+        
+        for (Lane lane : lanes){
+            lane.update();
+        }
     }
 
     @Override
