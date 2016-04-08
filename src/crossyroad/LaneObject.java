@@ -6,6 +6,7 @@
 package crossyroad;
 
 import images.ResourceTools;
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
 
@@ -15,44 +16,42 @@ import java.awt.Image;
  */
 public class LaneObject {
 
-private ObjectType type;
-Image Long_Log;
-Image Medium_Log;
-Image Short_Log;
-Image Tree;
-Image Car;
 
+    public LaneObject(ObjectType type, int x, int y, int speed, Image image) {
+        this.type = type;
+        
+        this.x = x;
+        this.y = y;
 
-public LaneObject(ObjectType type){
-    this.type = type;
-    
-}
+        this.speed = speed;
+        this.image = image;
+    }
 
-public void Draw(Graphics graphics){
+    public void draw(Graphics graphics) {
 //    graphics.drawImage(getImage, x, y, null)
-Long_Log = ResourceTools.loadImageFromResource("crossyroad/Long_Log.png");
-Medium_Log = ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png");
-Short_Log = ResourceTools.loadImageFromResource("crossyroad/Short_Log.png");
-Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
+//        Long_Log = ResourceTools.loadImageFromResource("crossyroad/Long_Log.png");
+//        Medium_Log = ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png");
+//        Short_Log = ResourceTools.loadImageFromResource("crossyroad/Short_Log.png");
+//        Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
 
-}
+        
+        graphics.setColor(Color.red);
+        graphics.drawRect(getX(), getY(), 20, 20);
 
-
-
+        if (image != null) {
+            graphics.drawImage(image, x, y, null);
+        }
+    
+    }
     //rafts, trains, cars
     //barriers -- trees, rocks, benches
     //coins
-    
-    // put pictures in!!
-   
-    
-    
-    public void barriers() {
-        
-        
-    }
 
-    
+    // put pictures in!!
+//    public void barriers() {
+//        
+//        
+//    }
 //<editor-fold defaultstate="collapsed" desc="Properties">
     //properties
     //  - speed
@@ -65,6 +64,7 @@ Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Direction direction;
     private Image image;
     private boolean standable;
+    private ObjectType type;
 
     /**
      * @return the speed
@@ -122,5 +122,37 @@ Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
         this.standable = standable;
     }
 //</editor-fold>
+
+    public void move() {
+        setX(getX() + speed);
+    }
+
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * @param x the x to set
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * @param y the y to set
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
 
 }
