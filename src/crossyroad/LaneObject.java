@@ -5,6 +5,9 @@
  */
 package crossyroad;
 
+import images.ResourceTools;
+import java.awt.Color;
+import java.awt.Graphics;
 import java.awt.Image;
 
 /**
@@ -12,12 +15,43 @@ import java.awt.Image;
  * @author aidanmartin
  */
 public class LaneObject {
+
+
+    public LaneObject(ObjectType type, int x, int y, int speed, Image image) {
+        this.type = type;
+        
+        this.x = x;
+        this.y = y;
+
+        this.speed = speed;
+        this.image = image;
+    }
+
+    public void draw(Graphics graphics) {
+//    graphics.drawImage(getImage, x, y, null)
+//        Long_Log = ResourceTools.loadImageFromResource("crossyroad/Long_Log.png");
+//        Medium_Log = ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png");
+//        Short_Log = ResourceTools.loadImageFromResource("crossyroad/Short_Log.png");
+//        Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
+
+        
+        graphics.setColor(Color.red);
+        graphics.drawRect(getX(), getY(), 20, 20);
+
+        if (image != null) {
+            graphics.drawImage(image, x, y, null);
+        }
     
+    }
     //rafts, trains, cars
     //barriers -- trees, rocks, benches
     //coins
-    
-    
+
+    // put pictures in!!
+//    public void barriers() {
+//        
+//        
+//    }
 //<editor-fold defaultstate="collapsed" desc="Properties">
     //properties
     //  - speed
@@ -30,56 +64,57 @@ public class LaneObject {
     private Direction direction;
     private Image image;
     private boolean standable;
-    
+    private ObjectType type;
+
     /**
      * @return the speed
      */
     public int getSpeed() {
         return speed;
     }
-    
+
     /**
      * @param speed the speed to set
      */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
+
     /**
      * @return the direction
      */
     public Direction getDirection() {
         return direction;
     }
-    
+
     /**
      * @param direction the direction to set
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
     }
-    
+
     /**
      * @return the image
      */
     public Image getImage() {
         return image;
     }
-    
+
     /**
      * @param image the image to set
      */
     public void setImage(Image image) {
         this.image = image;
     }
-    
+
     /**
      * @return the standable
      */
     public boolean isStandable() {
         return standable;
     }
-    
+
     /**
      * @param standable the standable to set
      */
@@ -87,6 +122,37 @@ public class LaneObject {
         this.standable = standable;
     }
 //</editor-fold>
-    
-    
+
+    public void move() {
+        setX(getX() + speed);
+    }
+
+    /**
+     * @return the x
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * @param x the x to set
+     */
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    /**
+     * @return the y
+     */
+    public int getY() {
+        return y;
+    }
+
+    /**
+     * @param y the y to set
+     */
+    public void setY(int y) {
+        this.y = y;
+    }
+
 }
