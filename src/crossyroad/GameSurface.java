@@ -10,6 +10,7 @@ import grid.Grid;
 import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.Point;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
@@ -26,7 +27,8 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     ArrayList<Lane> laneObjects;
     private int laneBaseHeight;
     private int laneHeight;
-    
+    private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
+    private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
 
     public GameSurface() {
 
@@ -35,8 +37,8 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
        lanes = new ArrayList<>();
        
        ArrayList<LaneObject> lo = new ArrayList<>();
-       lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
-//       lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 150, 200, 4));
+       lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 0, Tree));
+       lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 150, 200, 4, RedCar));
        
        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this));

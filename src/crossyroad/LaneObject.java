@@ -33,10 +33,10 @@ public class LaneObject {
 //        Medium_Log = ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png");
 //        Short_Log = ResourceTools.loadImageFromResource("crossyroad/Short_Log.png");
 //        Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
-
-        
-        graphics.setColor(Color.red);
-        graphics.drawRect(getX(), getY(), 20, 20);
+//
+//        
+//        graphics.setColor(Color.red);
+//        graphics.drawRect(getX(), getY(), 20, 20);
 
         if (image != null) {
             graphics.drawImage(image, x, y, null);
