@@ -30,6 +30,7 @@ public class LaneObject {
     //  - image
     //  - sound (later)
     //  - stand on it (true or false) - boolean
+    private int x, y;
     private int speed;
     private Direction direction;
     private Image image;
