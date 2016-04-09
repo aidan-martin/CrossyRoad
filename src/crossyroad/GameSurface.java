@@ -29,19 +29,24 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     private int laneHeight;
     private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
+    private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
 
     public GameSurface() {
 
-        grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
+//        grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
         
        lanes = new ArrayList<>();
        
        ArrayList<LaneObject> lo = new ArrayList<>();
-       lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 0, Tree));
-       lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 150, 200, 4, RedCar));
+       lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
+       lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
+//       lo.add(new LaneObject)
+//       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
+       
+       // figure out how to scale them, size (50) **
        
        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-//       lanes.add(new Lane(1, LaneType.SIDEWALK, this));
+       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
 //       lanes.add(new Lane(3, LaneType.WATER, this));
 

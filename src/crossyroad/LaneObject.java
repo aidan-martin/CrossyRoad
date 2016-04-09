@@ -17,7 +17,8 @@ import java.awt.Image;
 public class LaneObject {
 
 
-    public LaneObject(ObjectType type, int x, int y, int speed, Image image) {
+
+    public LaneObject(ObjectType type, int x, int y, int height, int width, int speed, Image image) {
         this.type = type;
         
         this.x = x;
@@ -25,6 +26,10 @@ public class LaneObject {
 
         this.speed = speed;
         this.image = image;
+        
+        this.height = height;
+        this.width = width;
+
     }
 
     public void draw(Graphics graphics) {
@@ -39,7 +44,7 @@ public class LaneObject {
 //        graphics.drawRect(getX(), getY(), 20, 20);
 
         if (image != null) {
-            graphics.drawImage(image, x, y, null);
+            graphics.drawImage(image, x, y, height, width, null);
         }
     
     }
@@ -61,6 +66,7 @@ public class LaneObject {
     //  - stand on it (true or false) - boolean
     private int x, y;
     private int speed;
+    private int height, width;
     private Direction direction;
     private Image image;
     private boolean standable;
@@ -153,6 +159,34 @@ public class LaneObject {
      */
     public void setY(int y) {
         this.y = y;
+    }
+
+    /**
+     * @return the height
+     */
+    public int getHeight() {
+        return height;
+    }
+
+    /**
+     * @param height the height to set
+     */
+    public void setHeight(int height) {
+        this.height = height;
+    }
+
+    /**
+     * @return the width
+     */
+    public int getWidth() {
+        return width;
+    }
+
+    /**
+     * @param width the width to set
+     */
+    public void setWidth(int width) {
+        this.width = width;
     }
 
 }
