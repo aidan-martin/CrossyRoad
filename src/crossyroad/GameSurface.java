@@ -56,7 +56,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     @Override
     public void initializeEnvironment() {
     }
-
+    
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
