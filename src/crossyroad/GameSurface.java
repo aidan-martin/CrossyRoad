@@ -21,7 +21,8 @@ import java.util.ArrayList;
  * @author aidanmartin
  */
 class GameSurface extends Environment implements SizeLocationProviderIntf {
-
+    
+    private MainCharacter cat;
     Grid grid;
     ArrayList<Lane> lanes;
     ArrayList<Lane> laneObjects;
@@ -30,34 +31,33 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
     private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
-
+    
     public GameSurface() {
-
-//        grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
         
-       lanes = new ArrayList<>();
-       
-       ArrayList<LaneObject> lo = new ArrayList<>();
-       lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
-       lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
+        cat = new MainCharacter(100, 100, Tree);
+
+//      grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
+        lanes = new ArrayList<>();
+        
+        ArrayList<LaneObject> lo = new ArrayList<>();
+        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
+        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
 //       lo.add(new LaneObject)
 //       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
-       
-       // figure out how to scale them, size (50) **
-       
-       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+
+        // figure out how to scale them, size (50) **
+        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
 //       lanes.add(new Lane(3, LaneType.WATER, this));
 
-       laneBaseHeight = 200;
-       laneHeight = 70;
-       
-       laneObjects = new ArrayList<>();
-       
-       
+        laneBaseHeight = 200;
+        laneHeight = 70;
+        
+        laneObjects = new ArrayList<>();
+        
     }
-
+    
     @Override
     public void initializeEnvironment() {
     }
@@ -66,35 +66,36 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     public void timerTaskHandler() {
         laneBaseHeight++;
         
-        for (Lane lane : lanes){
+        for (Lane lane : lanes) {
             lane.update();
         }
     }
-
+    
     @Override
     public void keyPressedHandler(KeyEvent e) {
+        
     }
-
+    
     @Override
     public void keyReleasedHandler(KeyEvent e) {
     }
-
+    
     @Override
     public void environmentMouseClicked(MouseEvent e) {
     }
-
+    
     @Override
     public void paintEnvironment(Graphics graphics) {
 //        if (grid != null) {
 //            grid.paintComponent(graphics);
 //        }
-        
+
         if (lanes != null) {
-            for (Lane lane: lanes){
+            for (Lane lane : lanes) {
                 lane.draw(graphics);
             }
         }
-
+        
     }
 
 //<editor-fold defaultstate="collapsed" desc="SizeLocationProviderIntf">
