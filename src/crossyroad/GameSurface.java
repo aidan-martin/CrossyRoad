@@ -55,11 +55,15 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 
         lanes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            if (Math.random() > .5) {
+            double rand = Math.random();
+            
+            if (rand < .34) {
                 lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else {
+            } else if (rand < .67 ){
                 lanes.add(Lane.getLane(i, LaneType.FIELD, this));
-            }
+            } else { 
+                lanes.add(Lane.getLane(i, LaneType.WATER, this));
+            }  
         }
     }
 
