@@ -35,10 +35,23 @@ public class Lane {
                         laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 300), 0, 100, 80, 4, ResourceTools.loadImageFromResource("crossyroad/Red_Car.png")));
                         laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 200), 0, 100, 80, 4, ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png")));
                         laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 100), 0, 100, 80, 4, ResourceTools.loadImageFromResource("crossyroad/Green_Car.png")));
-
+                        // Fix this pls ^^^^^^ make more random, cars going different directions and speeds
                     }
                 }
                 break;
+                
+            case WATER:
+                for (int i = 0; i < 5; i++) {
+                    if (Math.random() > .75) {
+                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Long_Log.png")));
+                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
+                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
+
+                    }
+                    
+                break;
+                    
+                }
         }
 
         return new Lane(laneNumber, type, sizeLocationProvider, laneObjects);
