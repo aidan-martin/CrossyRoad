@@ -24,7 +24,6 @@ public class CrossyRoad {
     
 }
 
-
 // TO DO:
 // - add lanes, randomize
 // - add objects, randomize
@@ -35,3 +34,4 @@ public class CrossyRoad {
 //   - drown in water
 //   - stand on logs
 //   - blocked by barries (trees)
+
