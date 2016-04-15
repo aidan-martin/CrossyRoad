@@ -16,38 +16,63 @@ import java.util.ArrayList;
  */
 public class Lane {
 
-    
+    public static Lane getLane(int laneNumber, LaneType type, SizeLocationProviderIntf sizeLocationProvider) {
+        ArrayList<LaneObject> laneObjects = new ArrayList<>();
+
+        switch (type) {
+            case FIELD:
+                for (int i = 0; i < 5; i++) {
+                    if (Math.random() > .75) {
+                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 100), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
+                    }
+                }
+                break;
+
+            case ROAD:
+                for (int i = 0; i < 2; i++) {
+                    if (Math.random() > .65) {
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 400), 0, 100, 80, 4, ResourceTools.loadImageFromResource("crossyroad/Yellow_Car.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 300), 0, 100, 80, 4, ResourceTools.loadImageFromResource("crossyroad/Red_Car.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 200), 0, 100, 80, 4, ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 100), 0, 100, 80, 4, ResourceTools.loadImageFromResource("crossyroad/Green_Car.png")));
+
+                    }
+                }
+                break;
+        }
+
+        return new Lane(laneNumber, type, sizeLocationProvider, laneObjects);
+    }
+
     {
         laneObjects = new ArrayList<>();
     }
-    
-    public Lane(int laneNumber, LaneType type, SizeLocationProviderIntf sizeLocationProvider, 
+
+    public Lane(int laneNumber, LaneType type, SizeLocationProviderIntf sizeLocationProvider,
             ArrayList<LaneObject> laneObjects) {
         this.laneNumber = laneNumber;
         this.type = type;
         this.sizeLocationProvider = sizeLocationProvider;
-        
+
         this.laneObjects = laneObjects;
 
-        //make array list for lane objects in lane class **************
     }
 
     public void draw(Graphics graphics) {
         for (LaneObject laneObject : laneObjects) {
             laneObject.setY(sizeLocationProvider.getTopLeftY(laneNumber));
         }
-        
-        
+
         graphics.setColor(getColor());
-        graphics.fillRect(sizeLocationProvider.getTopLeftX(laneNumber), 
-                sizeLocationProvider.getTopLeftY(laneNumber), 
-                sizeLocationProvider.getLaneWidth(laneNumber), 
+        graphics.fillRect(sizeLocationProvider.getTopLeftX(laneNumber),
+                sizeLocationProvider.getTopLeftY(laneNumber),
+                sizeLocationProvider.getLaneWidth(laneNumber),
                 sizeLocationProvider.getLaneHeight(laneNumber));
-        
-        for (LaneObject laneObject : laneObjects){
+
+        for (LaneObject laneObject : laneObjects) {
             laneObject.draw(graphics);
         }
-        
+
     }
 
     private Color getColor() {
@@ -63,8 +88,8 @@ public class Lane {
 
             case FIELD:
                 return Color.GREEN;
-            
-            default :
+
+            default:
                 return Color.WHITE;
 
         }
@@ -74,11 +99,11 @@ public class Lane {
     private final int laneNumber;
     private SizeLocationProviderIntf sizeLocationProvider;
     private int y;
-    
+
     private ArrayList<LaneObject> laneObjects;
 
     void update() {
-        for (LaneObject laneObject : laneObjects){
+        for (LaneObject laneObject : laneObjects) {
             laneObject.move();
         }
     }
