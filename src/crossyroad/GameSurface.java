@@ -34,7 +34,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     
     public GameSurface() {
         
-        cat = new MainCharacter(0, 0, Direction.UP, this);
+        cat = new MainCharacter(100, 100, Direction.UP, this, this);
 
 //      grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
         lanes = new ArrayList<>();

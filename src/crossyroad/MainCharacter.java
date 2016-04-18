@@ -20,12 +20,12 @@ import java.util.ArrayList;
  */
 public class MainCharacter {
 
-    public MainCharacter(int x, int y, Direction direction, MoveValidatorIntf moveValidator) {
+    public MainCharacter(int x, int y, Direction direction, MoveValidatorIntf moveValidator, SizeLocationProviderIntf sizeLocationProvider) {
         this.x = x;
         this.y = y;
-//        this.image = image;
         this.direction = direction;
         this.moveValidator = moveValidator;
+        this.sizeLocationProvider = sizeLocationProvider;
         
         
         ImageManager im = new ImageManager();
@@ -49,7 +49,7 @@ public class MainCharacter {
     
 
     public void draw(Graphics graphics) {
-        graphics.drawImage(image, x, y, null);
+        graphics.drawImage(getImage(), x, y, null);//topnleft x and y, height , width
     }
 
     public void move() {
@@ -76,8 +76,8 @@ public class MainCharacter {
     private Direction direction;
     private int x;
     private int y;
-    private Image image;
     private final MoveValidatorIntf moveValidator;
+    private SizeLocationProviderIntf sizeLocationProvider;
 
     /**
      * @return the direction
@@ -101,14 +101,11 @@ public class MainCharacter {
      * @return the image
      */
     public Image getImage() {
-        return image;
-    }
-
-    /**
-     * @param image the image to set
-     */
-    public void setImage(Image image) {
-        this.image = image;
+        if (animator != null) {
+            return animator.getCurrentImage();            
+        } else {
+            return null;
+        }
     }
 
     /**
