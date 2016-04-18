@@ -66,9 +66,12 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     public void timerTaskHandler() {
         laneBaseHeight++;
         
-        for (Lane lane : lanes) {
+        if (lanes != null) {
+             for (Lane lane : lanes) {
             lane.update();
         }
+        }
+       
     }
     
     @Override

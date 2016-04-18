@@ -36,7 +36,7 @@ public class MainCharacter {
         frontImages.add(cat1);
         frontImages.add(cat2);
         
-        animator = new Animator(im, frontImages, 400);
+        animator = new Animator(im, frontImages, 200);
         
     } 
     
@@ -49,7 +49,7 @@ public class MainCharacter {
     
 
     public void draw(Graphics graphics) {
-        graphics.drawImage(getImage(), x, y, null);//topnleft x and y, height , width
+        graphics.drawImage(getImage(), x, y, null);//top left x and y, height , width
     }
 
     public void move() {
