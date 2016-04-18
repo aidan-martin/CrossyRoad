@@ -20,7 +20,6 @@ import java.util.ArrayList;
  *
  * @author aidanmartin
  */
-
 class GameSurface extends Environment implements SizeLocationProviderIntf {
 
     Grid grid;
@@ -43,7 +42,6 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 //       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
 
        // figure out how to scale them, size (50) **
-        
 //       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
@@ -55,10 +53,14 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 
         lanes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            if (Math.random() > .5) {
+            double rand = Math.random();
+
+            if (rand < .34) {
                 lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else {
+            } else if (rand < .67) {
                 lanes.add(Lane.getLane(i, LaneType.FIELD, this));
+            } else {
+                lanes.add(Lane.getLane(i, LaneType.WATER, this));
             }
         }
     }
@@ -74,7 +76,6 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     }
 
 //</editor-fold>
-    
     @Override
     public void initializeEnvironment() {
     }
@@ -83,8 +84,10 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     public void timerTaskHandler() {
         laneBaseHeight++;
 
-        for (Lane lane : lanes) {
-            lane.update();
+        if (lanes != null) {
+            for (Lane lane : lanes) {
+                lane.update();
+            }
         }
     }
 
