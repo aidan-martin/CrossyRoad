@@ -5,10 +5,12 @@
  */
 package crossyroad;
 
+import java.awt.Point;
+
 /**
  *
- * @author aidanmartin
+ * @author leonsurwald
  */
-public enum Direction {
-    LEFT, RIGHT, UP, DOWN
+public interface MoveValidatorIntf {
+    public Point validateMove(Point proposedLocation);
 }

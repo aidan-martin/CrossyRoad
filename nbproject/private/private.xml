@@ -6,6 +6,8 @@
             <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/Lane.java</file>
             <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/SizeLocationProviderIntf.java</file>
             <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/LaneType.java</file>
+            <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/Direction.java</file>
+            <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/MoveValidatorIntf.java</file>
             <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/CrossyRoad.java</file>
             <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/LaneObject.java</file>
             <file>file:/Users/leonsurwald/NetBeansProjects/CrossyRoad/src/crossyroad/GameSurface.java</file>

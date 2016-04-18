@@ -5,9 +5,14 @@
  */
 package crossyroad;
 
+import images.Animator;
+import images.ImageManager;
+import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Point;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,30 +20,55 @@ import java.awt.Image;
  */
 public class MainCharacter {
 
-    public MainCharacter(int x, int y, Image image) {
+    public MainCharacter(int x, int y, Direction direction, MoveValidatorIntf moveValidator) {
         this.x = x;
         this.y = y;
-        this.image = image;
-    }
+//        this.image = image;
+        this.direction = direction;
+        this.moveValidator = moveValidator;
+        
+        
+        ImageManager im = new ImageManager();
+        im.addImage(cat1, ResourceTools.loadImageFromResource("crossyroad/cat1.png"));
+        im.addImage(cat2, ResourceTools.loadImageFromResource("crossyroad/cat2.png"));
+        
+        frontImages = new ArrayList<>();
+        frontImages.add(cat1);
+        frontImages.add(cat2);
+        
+        animator = new Animator(im, frontImages, 400);
+        
+    } 
+    
+    Animator animator;
+    
+    private static final String cat1 = "cat1";
+    private static final String cat2 = "cat2";
+    
+    private static ArrayList<String> frontImages;
+    
 
     public void draw(Graphics graphics) {
         graphics.drawImage(image, x, y, null);
     }
 
     public void move() {
-       int xNew = x;
-       int yNew = y;
-       
-        if (direction == Direction.LEFT) {
+        int xNew = x;
+        int yNew = y;
+
+        if (getDirection() == Direction.LEFT) {
             xNew--;
-        } else if (direction == Direction.RIGHT) {
+        } else if (getDirection() == Direction.RIGHT) {
             xNew++;
-        } else if (direction == Direction.UP) {
+        } else if (getDirection() == Direction.UP) {
             yNew++;
-        } else if (direction == Direction.DOWN) {
+        } else if (getDirection() == Direction.DOWN) {
             yNew--;
         }
-        
+
+        Point newLoc = moveValidator.validateMove(new Point(xNew, yNew));
+        x = newLoc.x;
+        y = newLoc.y;
         
     }
 
@@ -47,6 +77,7 @@ public class MainCharacter {
     private int x;
     private int y;
     private Image image;
+    private final MoveValidatorIntf moveValidator;
 
     /**
      * @return the direction
@@ -60,9 +91,9 @@ public class MainCharacter {
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
-        
+
         if (direction == Direction.UP) {
-            
+
         }
     }
 

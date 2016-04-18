@@ -20,7 +20,7 @@ import java.util.ArrayList;
  *
  * @author aidanmartin
  */
-class GameSurface extends Environment implements SizeLocationProviderIntf {
+class GameSurface extends Environment implements SizeLocationProviderIntf, MoveValidatorIntf {
     
     private MainCharacter cat;
     Grid grid;
@@ -34,7 +34,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     
     public GameSurface() {
         
-        cat = new MainCharacter(100, 100, Tree);
+        cat = new MainCharacter(0, 0, Direction.UP, this);
 
 //      grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
         lanes = new ArrayList<>();
@@ -73,7 +73,18 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     
     @Override
     public void keyPressedHandler(KeyEvent e) {
-        
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            cat.setDirection(Direction.LEFT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            cat.setDirection(Direction.RIGHT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            cat.setDirection(Direction.DOWN);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            cat.setDirection(Direction.UP);
+        }
     }
     
     @Override
@@ -94,6 +105,10 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
             for (Lane lane : lanes) {
                 lane.draw(graphics);
             }
+        }
+        
+        if (cat != null) {
+            cat.draw(graphics);
         }
         
     }
@@ -119,4 +134,9 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
         return this.getWidth();
     }
 //</editor-fold>
+
+    @Override
+    public Point validateMove(Point proposedLocation) {
+        return proposedLocation;
+    }
 }
