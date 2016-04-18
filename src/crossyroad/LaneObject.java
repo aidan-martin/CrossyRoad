@@ -127,8 +127,7 @@ public class LaneObject {
     public void setStandable(boolean standable) {
         this.standable = standable;
     }
-//</editor-fold>
-
+    
     public void move() {
         setX(getX() + speed);
     }
@@ -188,5 +187,8 @@ public class LaneObject {
     public void setWidth(int width) {
         this.width = width;
     }
+//</editor-fold>
+
+    
 
 }

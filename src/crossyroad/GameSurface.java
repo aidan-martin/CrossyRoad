@@ -20,9 +20,15 @@ import java.util.ArrayList;
  *
  * @author aidanmartin
  */
+<<<<<<< HEAD
 
 class GameSurface extends Environment implements SizeLocationProviderIntf {
 
+=======
+class GameSurface extends Environment implements SizeLocationProviderIntf, MoveValidatorIntf {
+    
+    private MainCharacter cat;
+>>>>>>> ls-123-01
     Grid grid;
     ArrayList<Lane> lanes;
     ArrayList<Lane> laneObjects;
@@ -31,26 +37,41 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
     private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
-
+    
     public GameSurface() {
+        
+        cat = new MainCharacter(100, 100, Direction.UP, this, this);
 
+<<<<<<< HEAD
 //        grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
 //       lanes = new ArrayList<>();
+=======
+//      grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
+        lanes = new ArrayList<>();
+        
+>>>>>>> ls-123-01
         ArrayList<LaneObject> lo = new ArrayList<>();
         lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
         lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
 //       lo.add(new LaneObject)
 //       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
 
+<<<<<<< HEAD
        // figure out how to scale them, size (50) **
         
 //       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+=======
+        // figure out how to scale them, size (50) **
+        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+>>>>>>> ls-123-01
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
 //       lanes.add(new Lane(3, LaneType.WATER, this));
         laneBaseHeight = 200;
         laneHeight = 70;
 
+<<<<<<< HEAD
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
@@ -74,32 +95,56 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     }
 
 //</editor-fold>
+=======
+        laneBaseHeight = 200;
+        laneHeight = 70;
+        
+        laneObjects = new ArrayList<>();
+        
+    }
+>>>>>>> ls-123-01
     
     @Override
     public void initializeEnvironment() {
     }
-
+    
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> ls-123-01
         for (Lane lane : lanes) {
             lane.update();
         }
     }
-
+    
     @Override
     public void keyPressedHandler(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            cat.setDirection(Direction.LEFT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            cat.setDirection(Direction.RIGHT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            cat.setDirection(Direction.DOWN);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            cat.setDirection(Direction.UP);
+        }
     }
-
+    
     @Override
     public void keyReleasedHandler(KeyEvent e) {
     }
-
+    
     @Override
     public void environmentMouseClicked(MouseEvent e) {
     }
-
+    
     @Override
     public void paintEnvironment(Graphics graphics) {
 //        if (grid != null) {
@@ -111,7 +156,11 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
                 lane.draw(graphics);
             }
         }
-
+        
+        if (cat != null) {
+            cat.draw(graphics);
+        }
+        
     }
 
 //<editor-fold defaultstate="collapsed" desc="SizeLocationProviderIntf">
@@ -136,4 +185,11 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     }
 //</editor-fold>
 
+<<<<<<< HEAD
+=======
+    @Override
+    public Point validateMove(Point proposedLocation) {
+        return proposedLocation;
+    }
+>>>>>>> ls-123-01
 }
