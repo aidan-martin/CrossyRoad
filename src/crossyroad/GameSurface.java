@@ -20,8 +20,9 @@ import java.util.ArrayList;
  *
  * @author aidanmartin
  */
-class GameSurface extends Environment implements SizeLocationProviderIntf {
-
+class GameSurface extends Environment implements SizeLocationProviderIntf, MoveValidatorIntf {
+    
+    private MainCharacter cat;
     Grid grid;
     ArrayList<Lane> lanes;
     ArrayList<Lane> laneObjects;
@@ -30,17 +31,22 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
     private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
-
+    
     public GameSurface() {
+        
+        cat = new MainCharacter(100, 100, Direction.UP, this, this);
 
-//        grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
-//       lanes = new ArrayList<>();
+        lanes = new ArrayList<>();
+        
         ArrayList<LaneObject> lo = new ArrayList<>();
         lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
         lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
 //       lo.add(new LaneObject)
 //       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
 
+        // figure out how to scale them, size (50) **
+        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
        // figure out how to scale them, size (50) **
 //       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
@@ -91,19 +97,31 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
        
         }
     }
-
+    
     @Override
     public void keyPressedHandler(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+            cat.setDirection(Direction.LEFT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+            cat.setDirection(Direction.RIGHT);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+            cat.setDirection(Direction.DOWN);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_UP) {
+            cat.setDirection(Direction.UP);
+        }
     }
-
+    
     @Override
     public void keyReleasedHandler(KeyEvent e) {
     }
-
+    
     @Override
     public void environmentMouseClicked(MouseEvent e) {
     }
-
+    
     @Override
     public void paintEnvironment(Graphics graphics) {
 //        if (grid != null) {
@@ -115,7 +133,11 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
                 lane.draw(graphics);
             }
         }
-
+        
+        if (cat != null) {
+            cat.draw(graphics);
+        }
+        
     }
 
 //<editor-fold defaultstate="collapsed" desc="SizeLocationProviderIntf">
@@ -140,4 +162,8 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     }
 //</editor-fold>
 
+    @Override
+    public Point validateMove(Point proposedLocation) {
+        return proposedLocation;
+    }
 }
