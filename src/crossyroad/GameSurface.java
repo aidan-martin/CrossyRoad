@@ -46,13 +46,13 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
 //       lanes.add(new Lane(3, LaneType.WATER, this));
-        laneBaseHeight = 200;
+        laneBaseHeight = 0;
         laneHeight = 70;
 
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 20; i++) {
             double rand = Math.random();
 
             if (rand < .34) {
@@ -79,7 +79,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     @Override
     public void initializeEnvironment() {
     }
-
+    
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
@@ -88,6 +88,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
             for (Lane lane : lanes) {
                 lane.update();
             }
+       
         }
     }
 
