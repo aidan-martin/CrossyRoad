@@ -20,15 +20,9 @@ import java.util.ArrayList;
  *
  * @author aidanmartin
  */
-<<<<<<< HEAD
-
-class GameSurface extends Environment implements SizeLocationProviderIntf {
-
-=======
 class GameSurface extends Environment implements SizeLocationProviderIntf, MoveValidatorIntf {
     
     private MainCharacter cat;
->>>>>>> ls-123-01
     Grid grid;
     ArrayList<Lane> lanes;
     ArrayList<Lane> laneObjects;
@@ -42,44 +36,33 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         
         cat = new MainCharacter(100, 100, Direction.UP, this, this);
 
-<<<<<<< HEAD
-//        grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
-//       lanes = new ArrayList<>();
-=======
-//      grid = new Grid(24, 13, 70, 70, new Point(0, 0), Color.DARK_GRAY);
         lanes = new ArrayList<>();
         
->>>>>>> ls-123-01
         ArrayList<LaneObject> lo = new ArrayList<>();
         lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
         lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
 //       lo.add(new LaneObject)
 //       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
 
-<<<<<<< HEAD
-       // figure out how to scale them, size (50) **
-        
-//       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-//       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-=======
         // figure out how to scale them, size (50) **
         lanes.add(new Lane(0, LaneType.FIELD, this, lo));
         lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
->>>>>>> ls-123-01
-//       lanes.add(new Lane(2, LaneType.ROAD, this));
-//       lanes.add(new Lane(3, LaneType.WATER, this));
+
         laneBaseHeight = 200;
         laneHeight = 70;
 
-<<<<<<< HEAD
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            if (Math.random() > .5) {
+            double rand = Math.random();
+
+            if (rand < .34) {
                 lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else {
+            } else if (rand < .67) {
                 lanes.add(Lane.getLane(i, LaneType.FIELD, this));
+            } else {
+                lanes.add(Lane.getLane(i, LaneType.WATER, this));
             }
         }
     }
@@ -95,15 +78,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     }
 
 //</editor-fold>
-=======
-        laneBaseHeight = 200;
-        laneHeight = 70;
-        
-        laneObjects = new ArrayList<>();
-        
-    }
->>>>>>> ls-123-01
-    
+
     @Override
     public void initializeEnvironment() {
     }
@@ -111,13 +86,11 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
-<<<<<<< HEAD
 
-=======
-        
->>>>>>> ls-123-01
-        for (Lane lane : lanes) {
-            lane.update();
+        if (lanes != null) {
+            for (Lane lane : lanes) {
+                lane.update();
+            }
         }
     }
     
@@ -185,11 +158,8 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     }
 //</editor-fold>
 
-<<<<<<< HEAD
-=======
     @Override
     public Point validateMove(Point proposedLocation) {
         return proposedLocation;
     }
->>>>>>> ls-123-01
 }
