@@ -31,11 +31,15 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
     private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
+    private int changeX;
+    private int changeY;
     
     public GameSurface() {
         
-        cat = new MainCharacter(100, 100, Direction.UP, this, this);
-
+        cat = new MainCharacter(750 + changeX,  + changeY, this, this);
+        
+        
+        
         lanes = new ArrayList<>();
         
         ArrayList<LaneObject> lo = new ArrayList<>();
@@ -95,21 +99,22 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
                 lane.update();
             }
         }
+
     }
     
     @Override
     public void keyPressedHandler(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            cat.setDirection(Direction.LEFT);
+            cat.setX(cat.getX() - getLaneHeight(1));
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            cat.setDirection(Direction.RIGHT);
+            cat.setX(cat.getX() + getLaneHeight(1));
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            cat.setDirection(Direction.DOWN);
+            cat.setY(cat.getY() + getLaneHeight(1));
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            cat.setDirection(Direction.UP);
+            cat.setY(cat.getY() - getLaneHeight(1));
         }
     }
     

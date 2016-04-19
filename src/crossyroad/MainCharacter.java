@@ -20,7 +20,7 @@ import java.util.ArrayList;
  */
 public class MainCharacter {
 
-    public MainCharacter(int x, int y, Direction direction, MoveValidatorIntf moveValidator, SizeLocationProviderIntf sizeLocationProvider) {
+    public MainCharacter(int x, int y, MoveValidatorIntf moveValidator, SizeLocationProviderIntf sizeLocationProvider) {
         this.x = x;
         this.y = y;
         this.direction = direction;
@@ -49,26 +49,29 @@ public class MainCharacter {
     
 
     public void draw(Graphics graphics) {
-        graphics.drawImage(getImage(), x, y, null);//topnleft x and y, height , width
+        graphics.drawImage(getImage(), x, y, null); //top left x and y, height , width
     }
 
     public void move() {
-        int xNew = x;
-        int yNew = y;
+        x = x;
+        y = y;
+        
+//        int x;
+//        int yNew = y;
+//
+//        if (getDirection() == Direction.LEFT) {
+//            x--;
+//        } else if (getDirection() == Direction.RIGHT) {
+//            x++;
+//        } else if (getDirection() == Direction.UP) {
+//            y++;
+//        } else if (getDirection() == Direction.DOWN) {
+//            y--;
+//        }
 
-        if (getDirection() == Direction.LEFT) {
-            xNew--;
-        } else if (getDirection() == Direction.RIGHT) {
-            xNew++;
-        } else if (getDirection() == Direction.UP) {
-            yNew++;
-        } else if (getDirection() == Direction.DOWN) {
-            yNew--;
-        }
-
-        Point newLoc = moveValidator.validateMove(new Point(xNew, yNew));
-        x = newLoc.x;
-        y = newLoc.y;
+//        Point newLoc = moveValidator.validateMove(new Point(xNew, yNew));
+//        x = newLoc.x;
+//        y = newLoc.y;
         
     }
 
