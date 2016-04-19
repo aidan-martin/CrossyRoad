@@ -47,7 +47,11 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         // figure out how to scale them, size (50) **
         lanes.add(new Lane(0, LaneType.FIELD, this, lo));
         lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-
+       // figure out how to scale them, size (50) **
+//       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+//       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+//       lanes.add(new Lane(2, LaneType.ROAD, this));
+//       lanes.add(new Lane(3, LaneType.WATER, this));
         laneBaseHeight = 200;
         laneHeight = 70;
 
@@ -78,7 +82,6 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     }
 
 //</editor-fold>
-
     @Override
     public void initializeEnvironment() {
     }
