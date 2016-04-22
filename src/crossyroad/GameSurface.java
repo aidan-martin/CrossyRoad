@@ -21,7 +21,8 @@ import java.util.ArrayList;
  * @author aidanmartin
  */
 class GameSurface extends Environment implements SizeLocationProviderIntf, MoveValidatorIntf {
-    
+
+//<editor-fold defaultstate="collapsed" desc="PROPERTIES">
     private MainCharacter cat;
     Grid grid;
     ArrayList<Lane> lanes;
@@ -31,14 +32,28 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
     private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
-    
+    private int changeX;
+    private int changeY;
+
+    private GameState gameState = GameState.MENU;
+
+    private Iterable<Lane> getLanesSafe() {
+        ArrayList<Lane> lanesSafe = new ArrayList<>();
+        for (Lane lane : lanes) {
+            lanesSafe.add(lane);
+        }
+        return lanesSafe;
+    }
+//</editor-fold>
+
     public GameSurface() {
-        
-        cat = new MainCharacter(100, 100, Direction.UP, this, this);
+
+        cat = new MainCharacter(750 + changeX, +changeY, 2, this, this);
 
         lanes = new ArrayList<>();
-        
+
         ArrayList<LaneObject> lo = new ArrayList<>();
+<<<<<<< HEAD
         lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
         lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
 //       lo.add(new LaneObject)
@@ -52,12 +67,16 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
 //       lanes.add(new Lane(3, LaneType.WATER, this));
+=======
+
+>>>>>>> am-graphics-01
         laneBaseHeight = 0;
         laneHeight = 70;
 
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
+<<<<<<< HEAD
         for (int i = 0; i < 20; i++) {
             double rand = Math.random();
 
@@ -70,6 +89,20 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
             } else {
                     lanes.add(Lane.getLane(i, LaneType.FIELD, this));
            }       
+=======
+        for (int i = 0; i < 30; i++) {
+            double rand = Math.random();
+
+            if (rand < .25) {
+                lanes.add(Lane.getLane(i, LaneType.ROAD, this));
+            } else if (rand < .50) {
+                lanes.add(Lane.getLane(i, LaneType.FIELD, this));
+            } else if (rand < .75) {
+                lanes.add(Lane.getLane(i, LaneType.WATER, this));
+            } else {
+                lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
+            }
+>>>>>>> am-graphics-01
         }
     }
 
@@ -87,59 +120,100 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     @Override
     public void initializeEnvironment() {
     }
-    
+
+    double moveDelay = 0;
+    double moveDelayLimit = 4;
+
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
 
         if (lanes != null) {
-            for (Lane lane : lanes) {
+            for (Lane lane : getLanesSafe()) {
                 lane.update();
             }
+<<<<<<< HEAD
        
+=======
+
         }
+        if (moveDelay >= moveDelayLimit) {
+            laneBaseHeight++;
+            moveDelay = 0;
+        } else {
+            laneBaseHeight++;
+
+>>>>>>> am-graphics-01
+        }
+
     }
-    
+
     @Override
     public void keyPressedHandler(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            cat.setDirection(Direction.LEFT);
+            cat.setX(cat.getX() - getLaneHeight(1));
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            cat.setDirection(Direction.RIGHT);
+            cat.setX(cat.getX() + getLaneHeight(1));
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            cat.setDirection(Direction.DOWN);
+            cat.addLaneNumber(1);
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            cat.setDirection(Direction.UP);
+            cat.addLaneNumber(-1);
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            gameState = GameState.PAUSE;
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER && gameState == GameState.MENU) {
+            gameState = GameState.GAME;
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER && gameState == GameState.PAUSE) {
+            gameState = GameState.GAME;
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER && gameState == GameState.GAMEOVER) {
+            gameState = GameState.RESTART;
         }
     }
-    
+
     @Override
     public void keyReleasedHandler(KeyEvent e) {
     }
-    
+
     @Override
     public void environmentMouseClicked(MouseEvent e) {
     }
-    
+
     @Override
     public void paintEnvironment(Graphics graphics) {
-//        if (grid != null) {
-//            grid.paintComponent(graphics);
-//        }
 
-        if (lanes != null) {
-            for (Lane lane : lanes) {
-                lane.draw(graphics);
-            }
+        switch (gameState) {
+            case MENU:
+                this.setBackground(Color.red);
+                graphics.setColor(Color.BLACK);
+                graphics.drawString("Press Enter to Start", 15, 15);
+                break;
+
+            case GAME:
+                this.setBackground(Color.WHITE);
+                if (lanes != null) {
+                    for (Lane lane : getLanesSafe()) {
+                        lane.draw(graphics);
+                    }
+                }
+
+                if (cat != null) {
+                    cat.draw(graphics);
+                }
+                break;
+
+            case PAUSE:
+                break;
+
+            case GAMEOVER:
+                break;
+
+            case RESTART:
+                break;
         }
-        
-        if (cat != null) {
-            cat.draw(graphics);
-        }
-        
+
     }
 
 //<editor-fold defaultstate="collapsed" desc="SizeLocationProviderIntf">
@@ -168,4 +242,5 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     public Point validateMove(Point proposedLocation) {
         return proposedLocation;
     }
+
 }

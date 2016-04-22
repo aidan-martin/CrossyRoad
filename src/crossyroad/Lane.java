@@ -21,9 +21,10 @@ public class Lane {
 
         switch (type) {
             case FIELD:
-                for (int i = 0; i < 5; i++) {
+               
+                for (int i = 0; i < 15; i++) {
                     if (Math.random() > .75) {
-                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 100), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
+                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 500), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
                     }
                 }
                 break;
@@ -49,12 +50,21 @@ public class Lane {
                     laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 200), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
                     laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
 
+<<<<<<< HEAD
                     }   
                 }
             break;
                 
             case SIDEWALK:
                    for (int i = 0; i < 10; i++) {
+=======
+                    }
+                    
+                break;
+                
+                
+                
+>>>>>>> am-graphics-01
                     
                 }
                 }
