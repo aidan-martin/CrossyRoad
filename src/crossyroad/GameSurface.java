@@ -34,10 +34,10 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
     private int changeX;
     private int changeY;
-    
+
     private Iterable<Lane> getLanesSafe() {
         ArrayList<Lane> lanesSafe = new ArrayList<>();
-        for (Lane lane : lanes){
+        for (Lane lane : lanes) {
             lanesSafe.add(lane);
         }
         return lanesSafe;
