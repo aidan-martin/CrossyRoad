@@ -51,26 +51,26 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         lanes = new ArrayList<>();
 
         ArrayList<LaneObject> lo = new ArrayList<>();
-        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
-        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
+//        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
+//        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
 //       lo.add(new LaneObject)
 //       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
 
         // figure out how to scale them, size (50) **
-        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+//        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+//        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
         // figure out how to scale them, size (50) **
 //       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
 //       lanes.add(new Lane(3, LaneType.WATER, this));
-        laneBaseHeight = 200;
+        laneBaseHeight = -500;
         laneHeight = 70;
 
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 50; i++) {
             double rand = Math.random();
 
             if (rand < .34) {
