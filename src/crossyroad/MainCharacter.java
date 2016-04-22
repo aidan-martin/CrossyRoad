@@ -20,9 +20,11 @@ import java.util.ArrayList;
  */
 public class MainCharacter {
 
-    public MainCharacter(int x, int y, Direction direction, MoveValidatorIntf moveValidator, SizeLocationProviderIntf sizeLocationProvider) {
+    public MainCharacter(int x, int y, int laneNumber, MoveValidatorIntf moveValidator, SizeLocationProviderIntf sizeLocationProvider) {
         this.x = x;
         this.y = y;
+        this.laneNumber = laneNumber;
+        
         this.direction = direction;
         this.moveValidator = moveValidator;
         this.sizeLocationProvider = sizeLocationProvider;
@@ -40,35 +42,32 @@ public class MainCharacter {
         
     } 
     
-    Animator animator;
-    
-    private static final String cat1 = "cat1";
-    private static final String cat2 = "cat2";
-    
-    private static ArrayList<String> frontImages;
-    
-
     public void draw(Graphics graphics) {
-        graphics.drawImage(getImage(), x, y, null);//topnleft x and y, height , width
+//        graphics.drawImage(getImage(), x, y, null); //top left x and y, height , width
+        graphics.drawImage(getImage(), x, this.sizeLocationProvider.getTopLeftY(getLaneNumber()), null); //top left x and y, height , width
     }
 
     public void move() {
-        int xNew = x;
-        int yNew = y;
+        x = x;
+//        y = y;
 
-        if (getDirection() == Direction.LEFT) {
-            xNew--;
-        } else if (getDirection() == Direction.RIGHT) {
-            xNew++;
-        } else if (getDirection() == Direction.UP) {
-            yNew++;
-        } else if (getDirection() == Direction.DOWN) {
-            yNew--;
-        }
+        
+//        int x;
+//        int yNew = y;
+//
+//        if (getDirection() == Direction.LEFT) {
+//            x--;
+//        } else if (getDirection() == Direction.RIGHT) {
+//            x++;
+//        } else if (getDirection() == Direction.UP) {
+//            y++;
+//        } else if (getDirection() == Direction.DOWN) {
+//            y--;
+//        }
 
-        Point newLoc = moveValidator.validateMove(new Point(xNew, yNew));
-        x = newLoc.x;
-        y = newLoc.y;
+//        Point newLoc = moveValidator.validateMove(new Point(xNew, yNew));
+//        x = newLoc.x;
+//        y = newLoc.y;
         
     }
 
@@ -76,6 +75,15 @@ public class MainCharacter {
     private Direction direction;
     private int x;
     private int y;
+    private Animator animator;
+    private int laneNumber;
+    
+    private static final String cat1 = "cat1";
+    private static final String cat2 = "cat2";
+    
+    private static ArrayList<String> frontImages;
+    
+
     private final MoveValidatorIntf moveValidator;
     private SizeLocationProviderIntf sizeLocationProvider;
 
@@ -134,6 +142,27 @@ public class MainCharacter {
      */
     public void setY(int y) {
         this.y = y;
+    }
+
+    /**
+     * @return the laneNumber
+     */
+    public int getLaneNumber() {
+        return laneNumber;
+    }
+
+    /**
+     * @param laneNumber the laneNumber to set
+     */
+    public void setLaneNumber(int laneNumber) {
+        this.laneNumber = laneNumber;
+    }
+    
+    /**
+     * @param laneNumber the laneNumber to set
+     */
+    public void addLaneNumber(int laneNumber) {
+        this.laneNumber += laneNumber;
     }
 //</editor-fold>
 
