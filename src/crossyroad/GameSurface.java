@@ -80,6 +80,9 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
     public void initializeEnvironment() {
     }
 
+    double moveDelay = 0;
+    double moveDelayLimit = 4;
+
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
@@ -88,7 +91,15 @@ class GameSurface extends Environment implements SizeLocationProviderIntf {
             for (Lane lane : lanes) {
                 lane.update();
             }
-        }
+         }
+        if (moveDelay >= moveDelayLimit) {
+            laneBaseHeight++;
+            moveDelay = 0; 
+        } else {
+            laneBaseHeight++;
+        
+            
+    }
     }
 
     @Override
