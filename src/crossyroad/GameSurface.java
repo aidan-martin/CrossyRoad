@@ -21,7 +21,8 @@ import java.util.ArrayList;
  * @author aidanmartin
  */
 class GameSurface extends Environment implements SizeLocationProviderIntf, MoveValidatorIntf {
-    
+
+//<editor-fold defaultstate="collapsed" desc="PROPERTIES">
     private MainCharacter cat;
     Grid grid;
     ArrayList<Lane> lanes;
@@ -31,13 +32,24 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
     private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
     private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
-    
+    private int changeX;
+    private int changeY;
+
+    private Iterable<Lane> getLanesSafe() {
+        ArrayList<Lane> lanesSafe = new ArrayList<>();
+        for (Lane lane : lanes) {
+            lanesSafe.add(lane);
+        }
+        return lanesSafe;
+    }
+//</editor-fold>
+
     public GameSurface() {
-        
-        cat = new MainCharacter(100, 100, Direction.UP, this, this);
+
+        cat = new MainCharacter(750 + changeX, +changeY, 2, this, this);
 
         lanes = new ArrayList<>();
-        
+
         ArrayList<LaneObject> lo = new ArrayList<>();
         lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
         lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
@@ -47,7 +59,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         // figure out how to scale them, size (50) **
         lanes.add(new Lane(0, LaneType.FIELD, this, lo));
         lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-       // figure out how to scale them, size (50) **
+        // figure out how to scale them, size (50) **
 //       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
@@ -85,42 +97,44 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     @Override
     public void initializeEnvironment() {
     }
-    
+
     @Override
     public void timerTaskHandler() {
         laneBaseHeight++;
 
         if (lanes != null) {
-            for (Lane lane : lanes) {
+            for (Lane lane : getLanesSafe()) {
                 lane.update();
             }
         }
+
     }
-    
+
     @Override
     public void keyPressedHandler(KeyEvent e) {
         if (e.getKeyCode() == KeyEvent.VK_LEFT) {
-            cat.setDirection(Direction.LEFT);
+            cat.setX(cat.getX() - getLaneHeight(1));
         }
         if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
-            cat.setDirection(Direction.RIGHT);
+            cat.setX(cat.getX() + getLaneHeight(1));
         }
         if (e.getKeyCode() == KeyEvent.VK_DOWN) {
-            cat.setDirection(Direction.DOWN);
+            cat.addLaneNumber(1);
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
-            cat.setDirection(Direction.UP);
+            cat.addLaneNumber(-1);
+
         }
     }
-    
+
     @Override
     public void keyReleasedHandler(KeyEvent e) {
     }
-    
+
     @Override
     public void environmentMouseClicked(MouseEvent e) {
     }
-    
+
     @Override
     public void paintEnvironment(Graphics graphics) {
 //        if (grid != null) {
@@ -128,15 +142,15 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
 //        }
 
         if (lanes != null) {
-            for (Lane lane : lanes) {
+            for (Lane lane : getLanesSafe()) {
                 lane.draw(graphics);
             }
         }
-        
+
         if (cat != null) {
             cat.draw(graphics);
         }
-        
+
     }
 
 //<editor-fold defaultstate="collapsed" desc="SizeLocationProviderIntf">
@@ -165,4 +179,5 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     public Point validateMove(Point proposedLocation) {
         return proposedLocation;
     }
+
 }
