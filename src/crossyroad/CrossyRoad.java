@@ -25,11 +25,11 @@ public class CrossyRoad {
 }
 
 // TO DO:
-// - add lanes, randomize
-// - add objects, randomize
-// - lanes need to know which objects go where (objects know whichs they belong in)
-// - create character  
-//   - move across lanes
+
+//improve randomness
+//make the lanes keep drawing -- start at top
+//game starts with lanes paused, press play to start moving
+
 //   - ability to be hit & die by cars
 //   - drown in water
 //   - stand on logs

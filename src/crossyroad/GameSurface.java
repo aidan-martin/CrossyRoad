@@ -35,6 +35,8 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     private int changeX;
     private int changeY;
 
+    private GameState gameState = GameState.MENU;
+
     private Iterable<Lane> getLanesSafe() {
         ArrayList<Lane> lanesSafe = new ArrayList<>();
         for (Lane lane : lanes) {
@@ -51,34 +53,24 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         lanes = new ArrayList<>();
 
         ArrayList<LaneObject> lo = new ArrayList<>();
-        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
-        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
-//       lo.add(new LaneObject)
-//       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
 
-        // figure out how to scale them, size (50) **
-        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-        // figure out how to scale them, size (50) **
-//       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-//       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-//       lanes.add(new Lane(2, LaneType.ROAD, this));
-//       lanes.add(new Lane(3, LaneType.WATER, this));
-        laneBaseHeight = 200;
+        laneBaseHeight = 0;
         laneHeight = 70;
 
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 30; i++) {
             double rand = Math.random();
 
-            if (rand < .34) {
+            if (rand < .25) {
                 lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else if (rand < .67) {
+            } else if (rand < .50) {
                 lanes.add(Lane.getLane(i, LaneType.FIELD, this));
-            } else {
+            } else if (rand < .75) {
                 lanes.add(Lane.getLane(i, LaneType.WATER, this));
+            } else {
+                lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
             }
         }
     }
@@ -109,20 +101,16 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
             for (Lane lane : getLanesSafe()) {
                 lane.update();
             }
-<<<<<<< HEAD
-         }
+
+        }
         if (moveDelay >= moveDelayLimit) {
             laneBaseHeight++;
-            moveDelay = 0; 
+            moveDelay = 0;
         } else {
             laneBaseHeight++;
-        
-            
-    }
-=======
+
         }
 
->>>>>>> master
     }
 
     @Override
@@ -138,7 +126,15 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         }
         if (e.getKeyCode() == KeyEvent.VK_UP) {
             cat.addLaneNumber(-1);
-
+        }
+        if (e.getKeyCode() == KeyEvent.VK_ESCAPE) {
+            gameState = GameState.PAUSE;
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER && gameState == GameState.MENU) {
+            gameState = GameState.GAME;
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER && gameState == GameState.PAUSE) {
+            gameState = GameState.GAME;
+        } else if (e.getKeyCode() == KeyEvent.VK_ENTER && gameState == GameState.GAMEOVER) {
+            gameState = GameState.RESTART;
         }
     }
 
@@ -152,18 +148,35 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
 
     @Override
     public void paintEnvironment(Graphics graphics) {
-//        if (grid != null) {
-//            grid.paintComponent(graphics);
-//        }
 
-        if (lanes != null) {
-            for (Lane lane : getLanesSafe()) {
-                lane.draw(graphics);
-            }
-        }
+        switch (gameState) {
+            case MENU:
+                this.setBackground(Color.red);
+                graphics.setColor(Color.BLACK);
+                graphics.drawString("Press Enter to Start", 15, 15);
+                break;
 
-        if (cat != null) {
-            cat.draw(graphics);
+            case GAME:
+                this.setBackground(Color.WHITE);
+                if (lanes != null) {
+                    for (Lane lane : getLanesSafe()) {
+                        lane.draw(graphics);
+                    }
+                }
+
+                if (cat != null) {
+                    cat.draw(graphics);
+                }
+                break;
+
+            case PAUSE:
+                break;
+
+            case GAMEOVER:
+                break;
+
+            case RESTART:
+                break;
         }
 
     }
