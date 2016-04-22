@@ -21,7 +21,7 @@ public class Lane {
 
         switch (type) {
             case FIELD:
-               
+
                 for (int i = 0; i < 15; i++) {
                     if (Math.random() > .75) {
                         laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 500), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
@@ -33,7 +33,7 @@ public class Lane {
                 for (int i = 0; i < 2; i++) {
                     if (Math.random() > .65) {
                         int speed = getRandomValue(3, 6);
-                        
+
                         laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 400), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Yellow_Car.png")));
                         laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 300), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Red_Car.png")));
                         laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 200), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png")));
@@ -42,38 +42,31 @@ public class Lane {
                     }
                 }
                 break;
-                
+
             case WATER:
                 for (int i = 0; i < 7; i++) {
                     if (Math.random() > .75) {
-                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 300), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Long_Log.png")));
-                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 200), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
-                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 300), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Long_Log.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 200), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
 
-<<<<<<< HEAD
-                    }   
-                }
-            break;
-                
-            case SIDEWALK:
-                   for (int i = 0; i < 10; i++) {
-=======
                     }
-                    
+                }
                 break;
-                
-                
-                
->>>>>>> am-graphics-01
-                    
+
+            case SIDEWALK:
+                for (int i = 0; i < 10; i++) {
+
                 }
-                }
-        
+
+                break;
+
+        }
 
         return new Lane(laneNumber, type, sizeLocationProvider, laneObjects);
     }
-    
-    private static int getRandomValue(int min, int max){
+
+    private static int getRandomValue(int min, int max) {
         return min + (int) (Math.random() * (max - min));
     }
 

@@ -53,43 +53,28 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         lanes = new ArrayList<>();
 
         ArrayList<LaneObject> lo = new ArrayList<>();
-<<<<<<< HEAD
-        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
-        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
-//       lo.add(new LaneObject)
-//       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
+//
+//        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
+//        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
+////       lo.add(new LaneObject)
+////       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
+//
+//        // figure out how to scale them, size (50) **
+//        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+//        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+//       // figure out how to scale them, size (50) **
+////       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+////       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+////       lanes.add(new Lane(2, LaneType.ROAD, this));
+////       lanes.add(new Lane(3, LaneType.WATER, this));
 
-        // figure out how to scale them, size (50) **
-        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-       // figure out how to scale them, size (50) **
-//       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-//       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-//       lanes.add(new Lane(2, LaneType.ROAD, this));
-//       lanes.add(new Lane(3, LaneType.WATER, this));
-=======
-
->>>>>>> am-graphics-01
         laneBaseHeight = 0;
         laneHeight = 70;
 
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
-<<<<<<< HEAD
-        for (int i = 0; i < 20; i++) {
-            double rand = Math.random();
-
-            if (rand < .25) {
-                lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
-            } else if (rand < .50) {
-                lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else if (rand < .75) {
-                lanes.add(Lane.getLane(i, LaneType.WATER, this));
-            } else {
-                    lanes.add(Lane.getLane(i, LaneType.FIELD, this));
-           }       
-=======
+        
         for (int i = 0; i < 30; i++) {
             double rand = Math.random();
 
@@ -102,7 +87,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
             } else {
                 lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
             }
->>>>>>> am-graphics-01
+
         }
     }
 
@@ -132,9 +117,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
             for (Lane lane : getLanesSafe()) {
                 lane.update();
             }
-<<<<<<< HEAD
-       
-=======
+
 
         }
         if (moveDelay >= moveDelayLimit) {
@@ -143,7 +126,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         } else {
             laneBaseHeight++;
 
->>>>>>> am-graphics-01
+
         }
 
     }
