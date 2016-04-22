@@ -49,12 +49,16 @@ public class Lane {
                     laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 200), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
                     laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
 
-                    }
-                    
-                break;
+                    }   
+                }
+            break;
+                
+            case SIDEWALK:
+                   for (int i = 0; i < 10; i++) {
                     
                 }
-        }
+                }
+        
 
         return new Lane(laneNumber, type, sizeLocationProvider, laneObjects);
     }

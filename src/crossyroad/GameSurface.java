@@ -61,13 +61,15 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         for (int i = 0; i < 20; i++) {
             double rand = Math.random();
 
-            if (rand < .34) {
+            if (rand < .25) {
+                lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
+            } else if (rand < .50) {
                 lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else if (rand < .67) {
-                lanes.add(Lane.getLane(i, LaneType.FIELD, this));
-            } else {
+            } else if (rand < .75) {
                 lanes.add(Lane.getLane(i, LaneType.WATER, this));
-            }
+            } else {
+                    lanes.add(Lane.getLane(i, LaneType.FIELD, this));
+           }       
         }
     }
 
