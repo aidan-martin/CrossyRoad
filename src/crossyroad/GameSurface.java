@@ -46,7 +46,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
 
     public GameSurface() {
 
-        cat = new MainCharacter(750 + changeX, +changeY, 2, this, this);
+        cat = new MainCharacter(750 + changeX, changeY, 1, this, this);
 
         lanes = new ArrayList<>();
 
@@ -70,17 +70,25 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
-        for (int i = 0; i < 50; i++) {
-            double rand = Math.random();
+        for (int i = 0; i < 20; i++) {
+            double random = getRandomValue(0, 3);
 
-            if (rand < .34) {
+            if (random == 0) {
                 lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else if (rand < .67) {
+            } else if (random == 1) {
                 lanes.add(Lane.getLane(i, LaneType.FIELD, this));
-            } else {
+            } else if (random == 2) {
                 lanes.add(Lane.getLane(i, LaneType.WATER, this));
+            } else if (random == 3) {
+                lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
+
             }
+
         }
+    }
+
+    private static int getRandomValue(int min, int max) {
+        return min + (int) (Math.random() * (max - min));
     }
 
 //<editor-fold defaultstate="collapsed" desc="GetRandom">
