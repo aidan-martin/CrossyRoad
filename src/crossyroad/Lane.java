@@ -23,20 +23,22 @@ public class Lane {
             case FIELD:
                 for (int i = 0; i < 5; i++) {
                     if (Math.random() > .75) {
-                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 100), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
+                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 100), 0, 50, 70, Direction.NULL,0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
                     }
                 }
                 break;
 
             case ROAD:
+                int xOffset = -400;
+                
                 for (int i = 0; i < 2; i++) {
                     if (Math.random() > .65) {
                         int speed = getRandomValue(3, 6);
                         
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 400), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Yellow_Car.png")));
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 300), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Red_Car.png")));
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 200), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png")));
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 100), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Green_Car.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 400) + xOffset, 0, 100, 80, Direction.LEFT, speed, ResourceTools.loadImageFromResource("crossyroad/Yellow_Car.png")));
+//                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 300), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Red_Car.png")));
+//                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 200), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png")));
+//                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 100), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Green_Car.png")));
                         // Fix this pls ^^^^^^ make more random, cars going different directions and speeds
                     }
                 }
@@ -45,9 +47,9 @@ public class Lane {
             case WATER:
                 for (int i = 0; i < 5; i++) {
                     if (Math.random() > .75) {
-                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 300), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Long_Log.png")));
-                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 200), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
-                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
+//                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 300), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Long_Log.png")));
+//                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 200), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
+//                    laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
 
                     }
                     
@@ -77,7 +79,8 @@ public class Lane {
         this.sizeLocationProvider = sizeLocationProvider;
 
         this.laneObjects = laneObjects;
-
+        this.startX = -400;
+        this.endX = 1700;
     }
 
     public void draw(Graphics graphics) {
@@ -121,26 +124,61 @@ public class Lane {
     private final int laneNumber;
     private SizeLocationProviderIntf sizeLocationProvider;
     private int y;
+    private int startX, endX;
 
     private ArrayList<LaneObject> laneObjects;
 
     void update() {
         for (LaneObject laneObject : laneObjects) {
             laneObject.move();
+            
+            if (laneObject.getX() > endX) {
+                laneObject.setX(startX);
+            }
         }
     }
 
+    //<editor-fold defaultstate="collapsed" desc="Properties">
     /**
      * @return the y
      */
     public int getY() {
         return y;
     }
-
+    
     /**
      * @param y the y to set
      */
     public void setY(int y) {
         this.y = y;
     }
+    
+    /**
+     * @return the startX
+     */
+    public int getStartX() {
+        return startX;
+    }
+    
+    /**
+     * @param startX the startX to set
+     */
+    public void setStartX(int startX) {
+        this.startX = startX;
+    }
+    
+    /**
+     * @return the endX
+     */
+    public int getEndX() {
+        return endX;
+    }
+    
+    /**
+     * @param endX the endX to set
+     */
+    public void setEndX(int endX) {
+        this.endX = endX;
+    }
+//</editor-fold>
 }

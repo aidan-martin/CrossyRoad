@@ -10,5 +10,5 @@ package crossyroad;
  * @author aidanmartin
  */
 public enum Direction {
-    LEFT, RIGHT, UP, DOWN
+    LEFT, RIGHT, NULL
 }

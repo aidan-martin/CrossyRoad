@@ -46,41 +46,49 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
 
     public GameSurface() {
 
-        cat = new MainCharacter(750 + changeX, +changeY, 2, this, this);
+        cat = new MainCharacter(750 + changeX, changeY, 1, this, this);
 
         lanes = new ArrayList<>();
 
         ArrayList<LaneObject> lo = new ArrayList<>();
-        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
-        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
+//        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
+//        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
 //       lo.add(new LaneObject)
 //       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
 
         // figure out how to scale them, size (50) **
-        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
+//        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
+//        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
         // figure out how to scale them, size (50) **
 //       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
 //       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
 //       lanes.add(new Lane(2, LaneType.ROAD, this));
 //       lanes.add(new Lane(3, LaneType.WATER, this));
-        laneBaseHeight = 200;
+        laneBaseHeight = -500;
         laneHeight = 70;
 
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            double rand = Math.random();
+        for (int i = 0; i < 20; i++) {
+            double random = getRandomValue(0, 3);
 
-            if (rand < .34) {
+            if (random == 0) {
                 lanes.add(Lane.getLane(i, LaneType.ROAD, this));
-            } else if (rand < .67) {
+            } else if (random == 1) {
                 lanes.add(Lane.getLane(i, LaneType.FIELD, this));
-            } else {
+            } else if (random == 2) {
                 lanes.add(Lane.getLane(i, LaneType.WATER, this));
+            } else if (random == 3) {
+                lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
+
             }
+
         }
+    }
+
+    private static int getRandomValue(int min, int max) {
+        return min + (int) (Math.random() * (max - min));
     }
 
 //<editor-fold defaultstate="collapsed" desc="GetRandom">

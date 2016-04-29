@@ -18,7 +18,7 @@ public class LaneObject {
 
 
 
-    public LaneObject(ObjectType type, int x, int y, int height, int width, int speed, Image image) {
+    public LaneObject(ObjectType type, int x, int y, int height, int width, Direction direction, int speed, Image image) {
         this.type = type;
         
         this.x = x;
@@ -29,6 +29,7 @@ public class LaneObject {
         
         this.height = height;
         this.width = width;
+        this.direction = direction;       
 
     }
 

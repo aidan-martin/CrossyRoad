@@ -99,10 +99,6 @@ public class MainCharacter {
      */
     public void setDirection(Direction direction) {
         this.direction = direction;
-
-        if (direction == Direction.UP) {
-
-        }
     }
 
     /**
