@@ -29,6 +29,7 @@ public class CrossyRoad {
 //improve randomness
 //make the lanes keep drawing -- start at top
 //game starts with lanes paused, press play to start moving
+//keep drawing cars & logs after they leave the screen
 
 //   - ability to be hit & die by cars
 //   - drown in water

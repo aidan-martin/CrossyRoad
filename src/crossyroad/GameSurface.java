@@ -29,13 +29,13 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     ArrayList<Lane> laneObjects;
     private int laneBaseHeight;
     private int laneHeight;
-    private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
-    private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
-    private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
+//    private Image Tree = ResourceTools.loadImageFromResource("crossyroad/Tree.png");
+//    private Image RedCar = ResourceTools.loadImageFromResource("crossyroad/Red_Car.png");
+//    private Image PurpleCar = ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png");
     private int changeX;
     private int changeY;
 
-    private GameState gameState = GameState.MENU;
+    private GameState gameState = GameState.GAME;
 
     private Iterable<Lane> getLanesSafe() {
         ArrayList<Lane> lanesSafe = new ArrayList<>();
@@ -48,33 +48,17 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
 
     public GameSurface() {
 
-        cat = new MainCharacter(750 + changeX, +changeY, 2, this, this);
 
         lanes = new ArrayList<>();
 
-        ArrayList<LaneObject> lo = new ArrayList<>();
-//
-//        lo.add(new LaneObject(ObjectType.STATIONARY_BARRIER, 50, 200, 40, 50, 0, Tree));
-//        lo.add(new LaneObject(ObjectType.MOVING_VEHICLE, 1, 2, 50, 35, 3, RedCar));
-////       lo.add(new LaneObject)
-////       lo.add(new LaneObject(ObjectType.MOVING_LOG, 70, 200, 10, 50, PurpleCar));
-//
-//        // figure out how to scale them, size (50) **
-//        lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-//        lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-//       // figure out how to scale them, size (50) **
-////       lanes.add(new Lane(0, LaneType.FIELD, this, lo));
-////       lanes.add(new Lane(1, LaneType.SIDEWALK, this, lo));
-////       lanes.add(new Lane(2, LaneType.ROAD, this));
-////       lanes.add(new Lane(3, LaneType.WATER, this));
-
+//        ArrayList<LaneObject> lo = new ArrayList<>();
         laneBaseHeight = 0;
         laneHeight = 70;
 
         laneObjects = new ArrayList<>();
 
         lanes = new ArrayList<>();
-        
+
         for (int i = 0; i < 30; i++) {
             double rand = Math.random();
 
@@ -87,8 +71,9 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
             } else {
                 lanes.add(Lane.getLane(i, LaneType.SIDEWALK, this));
             }
-
         }
+        
+        cat = new MainCharacter(750 + changeX, +changeY, 2, this, this);
     }
 
 //<editor-fold defaultstate="collapsed" desc="GetRandom">
@@ -117,18 +102,15 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
             for (Lane lane : getLanesSafe()) {
                 lane.update();
             }
-
-
         }
         if (moveDelay >= moveDelayLimit) {
-            laneBaseHeight++;
+            laneBaseHeight--;
             moveDelay = 0;
         } else {
-            laneBaseHeight++;
-
+            laneBaseHeight--;
 
         }
-
+        checkIntersection();
     }
 
     @Override
@@ -185,6 +167,7 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
                 if (cat != null) {
                     cat.draw(graphics);
                 }
+
                 break;
 
             case PAUSE:
@@ -224,6 +207,16 @@ class GameSurface extends Environment implements SizeLocationProviderIntf, MoveV
     @Override
     public Point validateMove(Point proposedLocation) {
         return proposedLocation;
+    }
+
+    public void checkIntersection() {
+        if ((lanes != null) && (cat != null)) {
+            for (LaneObject lo : lanes.get(cat.getLaneNumber()).getLaneObjects()) {
+                if (cat.getHitBox().intersects(lo.getHitBox())) {
+                    System.out.println("AAAAAAAAHHCHCHFHHSHHFHFHFHFHHF!!!!");
+                }
+            }
+        }
     }
 
 }

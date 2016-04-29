@@ -9,6 +9,7 @@ import images.ResourceTools;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
+import java.awt.Rectangle;
 
 /**
  *
@@ -16,17 +17,15 @@ import java.awt.Image;
  */
 public class LaneObject {
 
-
-
     public LaneObject(ObjectType type, int x, int y, int height, int width, int speed, Image image) {
         this.type = type;
-        
+
         this.x = x;
         this.y = y;
 
         this.speed = speed;
         this.image = image;
-        
+
         this.height = height;
         this.width = width;
 
@@ -46,17 +45,9 @@ public class LaneObject {
         if (image != null) {
             graphics.drawImage(image, x, y, height, width, null);
         }
-    
-    }
-    //rafts, trains, cars
-    //barriers -- trees, rocks, benches
-    //coins
 
-    // put pictures in!!
-//    public void barriers() {
-//        
-//        
-//    }
+    }
+
 //<editor-fold defaultstate="collapsed" desc="Properties">
     //properties
     //  - speed
@@ -71,6 +62,10 @@ public class LaneObject {
     private Image image;
     private boolean standable;
     private ObjectType type;
+
+    public Rectangle getHitBox() {
+        return new Rectangle(x, y, width, height);
+    }
 
     /**
      * @return the speed
@@ -127,7 +122,7 @@ public class LaneObject {
     public void setStandable(boolean standable) {
         this.standable = standable;
     }
-    
+
     public void move() {
         setX(getX() + speed);
     }
@@ -188,7 +183,5 @@ public class LaneObject {
         this.width = width;
     }
 //</editor-fold>
-
-    
 
 }

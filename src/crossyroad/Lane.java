@@ -24,7 +24,11 @@ public class Lane {
 
                 for (int i = 0; i < 15; i++) {
                     if (Math.random() > .75) {
-                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 500), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/Tree.png")));
+                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 500), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/tree1.png")));
+                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 400), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/tree2.png")));
+                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 300), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/tree3.png")));
+                        laneObjects.add(new LaneObject(ObjectType.STATIONARY_BARRIER, (i * 200), 0, 50, 70, 0, ResourceTools.loadImageFromResource("crossyroad/tree4.png")));
+                        //fix the ugly trees pls
                     }
                 }
                 break;
@@ -34,21 +38,23 @@ public class Lane {
                     if (Math.random() > .65) {
                         int speed = getRandomValue(3, 6);
 
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 400), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Yellow_Car.png")));
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 300), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Red_Car.png")));
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 200), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 700), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Yellow_Car.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 500), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Red_Car.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 300), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Purple_Car.png")));
                         laneObjects.add(new LaneObject(ObjectType.MOVING_VEHICLE, (i * 100), 0, 100, 80, speed, ResourceTools.loadImageFromResource("crossyroad/Green_Car.png")));
-                        // Fix this pls ^^^^^^ make more random, cars going different directions and speeds
+                     
                     }
                 }
                 break;
 
             case WATER:
                 for (int i = 0; i < 7; i++) {
-                    if (Math.random() > .75) {
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 300), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Long_Log.png")));
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 200), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
-                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 5, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
+                    if (Math.random() > 0.4) {
+//                        int speed = getRandomValue(3, 6);
+                        
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 1000), 0, 100, 50, 3, ResourceTools.loadImageFromResource("crossyroad/Long_Log.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 500), 0, 100, 50, 3, ResourceTools.loadImageFromResource("crossyroad/Short_Log.png")));
+                        laneObjects.add(new LaneObject(ObjectType.MOVING_LOG, (i * 100), 0, 100, 50, 3, ResourceTools.loadImageFromResource("crossyroad/Medium_Log.png")));
 
                     }
                 }
@@ -60,6 +66,9 @@ public class Lane {
                 }
 
                 break;
+                
+                //min & max of objects in lanes
+                
 
         }
 
@@ -85,7 +94,7 @@ public class Lane {
     }
 
     public void draw(Graphics graphics) {
-        for (LaneObject laneObject : laneObjects) {
+        for (LaneObject laneObject : getLaneObjects()) {
             laneObject.setY(sizeLocationProvider.getTopLeftY(laneNumber));
         }
 
@@ -94,21 +103,22 @@ public class Lane {
                 sizeLocationProvider.getTopLeftY(laneNumber),
                 sizeLocationProvider.getLaneWidth(laneNumber),
                 sizeLocationProvider.getLaneHeight(laneNumber));
-
-        for (LaneObject laneObject : laneObjects) {
+        
+        for (LaneObject laneObject : getLaneObjects()) {
             laneObject.draw(graphics);
         }
 
     }
 
     private Color getColor() {
+        
         switch (type) {
             case WATER:
                 return Color.BLUE;
 
             case ROAD:
                 return Color.DARK_GRAY;
-
+                        
             case SIDEWALK:
                 return Color.GRAY;
 
@@ -129,7 +139,7 @@ public class Lane {
     private ArrayList<LaneObject> laneObjects;
 
     void update() {
-        for (LaneObject laneObject : laneObjects) {
+        for (LaneObject laneObject : getLaneObjects()) {
             laneObject.move();
         }
     }
@@ -146,5 +156,12 @@ public class Lane {
      */
     public void setY(int y) {
         this.y = y;
+    }
+
+    /**
+     * @return the laneObjects
+     */
+    public ArrayList<LaneObject> getLaneObjects() {
+        return laneObjects;
     }
 }
